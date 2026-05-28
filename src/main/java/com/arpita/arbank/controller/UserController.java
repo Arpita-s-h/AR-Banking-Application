@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/arbank/users")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 @Tag(name = "AR Banking User Management APIs")
 public class UserController {
 
