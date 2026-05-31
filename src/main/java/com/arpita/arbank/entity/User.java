@@ -8,6 +8,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * REPLACE your existing User.java with this file.
+ * Added: password, role fields for JWT authentication.
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -47,6 +51,9 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(nullable = false)
+    private String password; // NEW — stores BCrypt-encoded password
+
     @Column(unique = true, nullable = false)
     private String phoneNumber;
 
@@ -57,6 +64,10 @@ public class User {
 
     @Column(nullable = false)
     private Boolean accountLocked;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role; // NEW — ROLE_USER or ROLE_ADMIN
 
     @CreationTimestamp
     private LocalDateTime createdAt;
