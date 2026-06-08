@@ -368,5 +368,60 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Account is locked");
         }
     }
+// ADD THIS METHOD to the bottom of UserServiceImpl.java
+// (before the last closing brace)
+
+    @Override
+    @Transactional
+    public ProfileResponse updateProfile(String email, UpdateProfileRequest request) {
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (request.getFirstName() != null && !request.getFirstName().isBlank())
+            user.setFirstName(request.getFirstName());
+
+        if (request.getLastName() != null && !request.getLastName().isBlank())
+            user.setLastName(request.getLastName());
+
+        if (request.getOtherName() != null)
+            user.setOtherName(request.getOtherName());
+
+        if (request.getGender() != null && !request.getGender().isBlank())
+            user.setGender(request.getGender());
+
+        if (request.getAddress() != null && !request.getAddress().isBlank())
+            user.setAddress(request.getAddress());
+
+        if (request.getStateOfOrigin() != null && !request.getStateOfOrigin().isBlank())
+            user.setStateOfOrigin(request.getStateOfOrigin());
+
+        if (request.getPhoneNumber() != null && !request.getPhoneNumber().isBlank())
+            user.setPhoneNumber(request.getPhoneNumber());
+
+        if (request.getAlternativePhoneNumber() != null)
+            user.setAlternativePhoneNumber(request.getAlternativePhoneNumber());
+
+        User updated = userRepository.save(user);
+
+        log.info("Profile updated for: {}", email);
+
+        return ProfileResponse.builder()
+                .firstName(updated.getFirstName())
+                .lastName(updated.getLastName())
+                .otherName(updated.getOtherName())
+                .email(updated.getEmail())
+                .phoneNumber(updated.getPhoneNumber())
+                .alternativePhoneNumber(updated.getAlternativePhoneNumber())
+                .gender(updated.getGender())
+                .address(updated.getAddress())
+                .stateOfOrigin(updated.getStateOfOrigin())
+                .accountNumber(updated.getAccountNumber())
+                .accountBalance(updated.getAccountBalance())
+                .status(updated.getStatus())
+                .accountLocked(updated.getAccountLocked())
+                .createdAt(updated.getCreatedAt())
+                .build();
+    }
 
 }

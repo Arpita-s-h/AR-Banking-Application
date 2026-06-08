@@ -479,3 +479,240 @@ body {
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ADD THESE STYLES to the bottom of your existing index.css */
+
+/* ── Light Theme ── */
+[data-theme="light"] {
+  --navy: #f0f4f8;
+  --navy-light: #e2eaf3;
+  --navy-mid: #d0dcea;
+  --gold: #b8860b;
+  --gold-light: #d4a017;
+  --gold-dim: rgba(184,134,11,0.12);
+  --white: #1a2332;
+  --muted: #5a6a7a;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --border: rgba(184,134,11,0.2);
+}
+
+[data-theme="light"] body {
+  background-image:
+    radial-gradient(ellipse at 10% 20%, rgba(184,134,11,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 90% 80%, rgba(200,215,230,0.8) 0%, transparent 60%);
+}
+
+[data-theme="light"] .form-input {
+  background: rgba(0,0,0,0.04);
+  color: var(--white);
+}
+
+[data-theme="light"] .ar-nav {
+  background: rgba(240, 244, 248, 0.95);
+}
+
+/* ── Theme Toggle Button ── */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+.theme-toggle:hover { border-color: var(--gold); }
+
+/* Fix dashboard banner text visibility */
+.dash-banner__greeting { color: var(--muted); }
+.dash-banner__name {
+  color: var(--white);
+  text-shadow: none;
+  font-weight: 700;
+}
+.dash-banner__acc { color: var(--muted); }
+.dash-banner__bal-label { color: var(--muted); }
+
+/* dash-banner background contrast */
+.dash-banner {
+  background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy-light) 100%);
+  border: 1px solid var(--gold);
+}
+
+[data-theme="dark"] .dash-banner__name {
+  color: #f5f1eb;
+}
+
+[data-theme="light"] .dash-banner__name {
+  color: #0a1628;
+}
+
+[data-theme="light"] .dash-banner__acc {
+  color: #4a5568;
+}
+
+/* ── Profile ── */
+.profile-hero {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.profile-hero__avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.profile-hero__info { flex: 1; }
+.profile-hero__name { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 600; margin-bottom: 4px; }
+.profile-hero__email { color: var(--muted); font-size: 14px; margin-bottom: 10px; }
+.profile-hero__badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.profile-hero__balance { text-align: right; }
+.profile-hero__balance-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 4px; }
+.profile-hero__balance-amount { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: var(--gold); }
+.profile-hero__acc-num { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.status-badge--active   { background: rgba(46,204,113,0.15); color: var(--success); }
+.status-badge--inactive { background: rgba(231,76,60,0.15);  color: var(--danger); }
+.status-badge--unlocked { background: rgba(46,204,113,0.12); color: var(--success); }
+.status-badge--locked   { background: rgba(231,76,60,0.12);  color: var(--danger); }
+
+.profile-details { margin-top: 1.5rem; }
+.profile-details__heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+.profile-field__label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 4px; }
+.profile-field__value { font-size: 15px; font-weight: 500; }
+
+/* ── Filter Bar ── */
+.filter-bar {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.filter-bar .form-field { margin-bottom: 0; }
+
+/* ── Transaction time ── */
+.tx-time { font-size: 11px; color: var(--muted); }
+.tx-badge--transfer { background: rgba(52,152,219,0.15); color: #3498db; }
+
+/* ── Statement summary 4 cols ── */
+.statement-summary { grid-template-columns: repeat(4, 1fr); }
+
+/* ── Navbar profile link ── */
+.ar-nav__user {
+  color: var(--gold);
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--gold-dim);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.ar-nav__user:hover { background: rgba(201,168,76,0.25); }
+
+@media (max-width: 768px) {
+  .dash-banner { flex-direction: column; align-items: flex-start; }
+  .dash-banner__right { text-align: left; }
+  .profile-hero { flex-direction: column; align-items: flex-start; }
+  .profile-hero__balance { text-align: left; }
+  .statement-summary { grid-template-columns: repeat(2, 1fr); }
+  .filter-bar { flex-direction: column; }
+}
+
+/* Dark theme — force visible text in cards */
+[data-theme="dark"] .profile-hero__name,
+[data-theme="dark"] .profile-field__value,
+[data-theme="dark"] .profile-details__heading,
+[data-theme="dark"] .page__title,
+[data-theme="dark"] .page__sub,
+[data-theme="dark"] .section-heading {
+  color: #f0ece4 !important;
+}
+
+[data-theme="dark"] .profile-field__label,
+[data-theme="dark"] .profile-hero__email {
+  color: #8899aa !important;
+}
+
+[data-theme="dark"] .card {
+  background: rgba(14, 26, 50, 0.95) !important;
+  color: #f0ece4 !important;
+}
+
+[data-theme="dark"] .profile-hero__avatar {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(201,168,76,0.15) !important;
+}
+
+/* ADD THESE STYLES to the bottom of index.css */
+
+/* ── Edit Profile ── */
+.profile-details__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-details__heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.btn-sm {
+  padding: 6px 14px !important;
+  font-size: 13px !important;
+}
+
+.form-input--sm {
+  padding: 7px 10px;
+  font-size: 13px;
+  border-radius: 6px;
+  width: 100%;
+}
+
+/* ── Success Banner ── */
+.success-banner {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: rgba(46, 204, 113, 0.1);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  color: var(--success);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+  animation: fadeUp 0.3s ease;
+}

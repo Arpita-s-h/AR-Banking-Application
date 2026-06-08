@@ -6,7 +6,6 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // On app load, restore user from localStorage
   useEffect(() => {
     const token = localStorage.getItem('ar_token');
     const saved = localStorage.getItem('ar_user');
@@ -28,11 +27,17 @@ export function AuthProvider({ children }) {
     setUser(null);
   };
 
+  const updateUser = (newData) => {
+    const updated = { ...user, ...newData };
+    localStorage.setItem('ar_user', JSON.stringify(updated));
+    setUser(updated);
+  };
+
   const isAdmin = () => user?.role === 'ROLE_ADMIN';
   const isAuthenticated = () => !!user;
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAdmin, isAuthenticated, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, updateUser, isAdmin, isAuthenticated, loading }}>
       {children}
     </AuthContext.Provider>
   );

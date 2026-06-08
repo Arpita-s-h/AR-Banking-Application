@@ -7,16 +7,12 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-// Attach JWT token to every request automatically
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('ar_token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
-// Redirect to login if token expires (401)
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -30,16 +26,19 @@ api.interceptors.response.use(
 );
 
 // Auth
-export const registerUser  = (data) => api.post('/auth/register', data);
-export const loginUser     = (data) => api.post('/auth/login', data);
+export const registerUser = (data) => api.post('/auth/register', data);
+export const loginUser    = (data) => api.post('/auth/login', data);
+
+// Profile
+export const getProfile    = ()     => api.get('/users/profile');
+export const updateProfile = (data) => api.put('/users/profile', data);
 
 // Banking
-export const createAccount  = (data) => api.post('/users', data);
-export const balanceEnquiry = (accountNumber) => api.get(`/users/balance-enquiry?accountNumber=${accountNumber}`);
-export const nameEnquiry    = (accountNumber) => api.get(`/users/name-enquiry?accountNumber=${accountNumber}`);
-export const creditAccount  = (data) => api.post('/users/credit', data);
-export const debitAccount   = (data) => api.post('/users/debit', data);
-export const transferFunds  = (data) => api.post('/users/transfer', data);
+export const balanceEnquiry   = (accountNumber) => api.get(`/users/balance-enquiry?accountNumber=${accountNumber}`);
+export const nameEnquiry      = (accountNumber) => api.get(`/users/name-enquiry?accountNumber=${accountNumber}`);
+export const creditAccount    = (data) => api.post('/users/credit', data);
+export const debitAccount     = (data) => api.post('/users/debit', data);
+export const transferFunds    = (data) => api.post('/users/transfer', data);
 export const getBankStatement = (accountNumber, startDate, endDate) =>
   api.get(`/transactions/statement?accountNumber=${accountNumber}&startDate=${startDate}&endDate=${endDate}`);
 
