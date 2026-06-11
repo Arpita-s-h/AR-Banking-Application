@@ -26,8 +26,9 @@ api.interceptors.response.use(
 );
 
 // Auth
-export const registerUser = (data) => api.post('/auth/register', data);
-export const loginUser    = (data) => api.post('/auth/login', data);
+export const registerUser  = (data) => api.post('/auth/register', data);
+export const registerAdmin = (data) => api.post('/auth/register-admin', data);
+export const loginUser     = (data) => api.post('/auth/login', data);
 
 // Profile
 export const getProfile    = ()     => api.get('/users/profile');
@@ -41,5 +42,14 @@ export const debitAccount     = (data) => api.post('/users/debit', data);
 export const transferFunds    = (data) => api.post('/users/transfer', data);
 export const getBankStatement = (accountNumber, startDate, endDate) =>
   api.get(`/transactions/statement?accountNumber=${accountNumber}&startDate=${startDate}&endDate=${endDate}`);
+
+// Admin
+export const getAdminStats       = ()              => api.get('/admin/stats');
+export const getAllUsers          = ()              => api.get('/admin/users');
+export const searchUser          = (accountNumber) => api.get(`/admin/users/search?accountNumber=${accountNumber}`);
+export const blockUser           = (accountNumber) => api.put(`/admin/users/${accountNumber}/block`);
+export const unblockUser         = (accountNumber) => api.put(`/admin/users/${accountNumber}/unblock`);
+export const deleteUser          = (accountNumber) => api.delete(`/admin/users/${accountNumber}`);
+export const getAllTransactions   = ()              => api.get('/admin/transactions');
 
 export default api;

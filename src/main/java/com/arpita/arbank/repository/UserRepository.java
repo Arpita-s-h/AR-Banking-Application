@@ -5,15 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
+/**
+ * Added: findByAccountNumber, existsByPhoneNumber methods.
+ */
 public interface UserRepository extends JpaRepository<User, Long> {
-
     Boolean existsByEmail(String email);
-
-    Boolean existsByAccountNumber(String accountNumber);
-
     Boolean existsByPhoneNumber(String phoneNumber);
-
-    Optional<User> findByAccountNumber(String accountNumber);
-
     Optional<User> findByEmail(String email);
+    Optional<User> findByAccountNumber(String accountNumber);
 }

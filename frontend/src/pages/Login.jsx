@@ -18,7 +18,7 @@ export default function Login() {
       const res = await loginUser(form);
       const { token, ...userData } = res.data;
       login(userData, token);
-      navigate('/dashboard');
+      navigate(userData.role === 'ROLE_ADMIN' ? '/admin' : '/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Invalid email or password.');
     } finally {
